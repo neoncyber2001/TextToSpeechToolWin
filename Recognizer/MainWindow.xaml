@@ -1,0 +1,69 @@
+﻿<Window x:Class="Recognizer.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Recognizer"
+        mc:Ignorable="d"
+        Title="MainWindow"  SizeToContent="Height" WindowStyle="None" AllowsTransparency="True" Opacity=".75" Width="800" d:DataContext="{d:DesignInstance {x:Type local:RecogVM}, IsDesignTimeCreatable=True}">
+    <Window.Resources>
+        <Style TargetType="ToggleButton">
+            <Setter Property="Width" Value="55"/>
+            <Setter Property="Height" Value="55"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Padding" Value="5"/>
+            <Setter Property="FontFamily" Value="Segoe MDL2 Assets"/>
+            <Setter Property="FontSize" Value="32"/>
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="Width" Value="55"/>
+            <Setter Property="Height" Value="55"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Padding" Value="5"/>
+            <Setter Property="FontFamily" Value="Segoe MDL2 Assets"/>
+            <Setter Property="FontSize" Value="32"/>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        <Border BorderBrush="Black" BorderThickness="1" Grid.ColumnSpan="6" Grid.RowSpan="2"/>
+        <Thumb Width="10" Margin="5" Background="LightGray" BorderBrush="Black" BorderThickness=".75" DragDelta="Thumb_DragDelta" >
+            <Thumb.Template>
+                <ControlTemplate>
+                    <Border Width="{TemplateBinding Property=Width}" BorderBrush="{TemplateBinding Property=BorderBrush}" Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}"/>
+                </ControlTemplate>
+            </Thumb.Template>
+        </Thumb>
+        <Button x:Name="MenuButton" Grid.Column="1" Click="MenuButton_Click">
+            <Button.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Send to Window" IsCheckable="True"/>
+                    <MenuItem Header="Configure"/>
+                    <Separator/>
+                    <MenuItem Header="Exit">
+                        <MenuItem.Icon>
+                            <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE8BB;"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                </ContextMenu>
+            </Button.ContextMenu>
+            <Button.Content>&#xE765;</Button.Content>
+        </Button>
+        <ToggleButton Grid.Column="2" IsChecked="{Binding IsSpeechOn}" >&#xE720;</ToggleButton>
+        <TextBox Grid.Column="3" FontSize="32" Margin="5" Padding="5">This is your text.</TextBox>
+        <Button Grid.Column="4" Foreground="Green">&#xE8FB;</Button>
+        <Button Grid.Column="5" Foreground="Maroon">&#xE711;</Button>
+        <TextBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="5" FontSize="16" Height="255" VerticalScrollBarVisibility="Visible" Margin="5" Padding="3" Visibility="Collapsed"/>
+    </Grid>
+</Window>
