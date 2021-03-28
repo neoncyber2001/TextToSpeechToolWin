@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TextToSpeechTool"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800" d:DataContext="{d:DesignInstance {x:Type local:MainVM}, IsDesignTimeCreatable=True}">
+        Title="Text To Speech Tool" Height="450" Width="800" d:DataContext="{d:DesignInstance {x:Type local:MainVM}, IsDesignTimeCreatable=True}" Icon="Resources/TTSTool.ico">
     <Window.Resources>
         <Style TargetType="TextBlock">
             <Setter Property="Margin" Value="3"/>

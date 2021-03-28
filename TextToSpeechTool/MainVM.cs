@@ -15,9 +15,14 @@ using System.Globalization;
 
 namespace TextToSpeechTool
 {
-
+    /// <summary>
+    /// Main View Model.
+    /// </summary>
     public class MainVM : INotifyPropertyChanged
     {
+        /// <summary>
+        /// Default Constructor.
+        /// </summary>
         public MainVM()
         {
 
@@ -43,9 +48,6 @@ namespace TextToSpeechTool
                     Debug.WriteLine(ex);
                 }
             });
-/*            _Synth.GetInstalledVoices().ToList().ForEach((iv) =>
-            {
-            });*/
             Rate = _Synth.Rate;
             Synth.SpeakProgress += Synth_SpeakProgress;
             Synth.SpeakCompleted += Synth_SpeakCompleted;
@@ -53,6 +55,11 @@ namespace TextToSpeechTool
 
 
         private bool isNoAudio = false;
+        /// <summary>
+        /// Event Handler Method used when for completion of speech.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Synth_SpeakCompleted(object sender, SpeakCompletedEventArgs e)
         {
             progress = 1;
@@ -74,6 +81,7 @@ namespace TextToSpeechTool
         }
 
         private Prompt pr;
+
         private bool _isTextEditEnabled=true;
 
         public bool isTextEditEnabled
@@ -88,7 +96,9 @@ namespace TextToSpeechTool
 
 
         private int _Rate;
-
+        /// <summary>
+        /// Rate of speech
+        /// </summary>
         public int Rate
         {
             get => _Rate;
@@ -130,7 +140,9 @@ namespace TextToSpeechTool
         }
 
         private String _Phrase;
-
+        /// <summary>
+        /// The text to read.
+        /// </summary>
         public String Phrase
         {
             get => _Phrase;
@@ -140,7 +152,10 @@ namespace TextToSpeechTool
                 NotifyPropertyChanged();
             }
         }
-
+        /// <summary>
+        /// Gets a list of Command Bindings
+        /// </summary>
+        /// <returns>List of command bindings.</returns>
         public List<CommandBinding> getBindings()
         {
             List<CommandBinding> bindinglist = new List<CommandBinding>();
@@ -150,10 +165,11 @@ namespace TextToSpeechTool
             return bindinglist;
         }
 
-        //CommandBindingEventHandlers for Speek
+        /// <summary>
+        /// CommandBindingEventHandlers for Speek
+        /// </summary>
         private void Speek_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            //Todo
             if (Phrase != String.Empty && Phrase != null && e.Parameter!=null && !isNoAudio)
             {
                 e.CanExecute = true;
@@ -187,10 +203,14 @@ namespace TextToSpeechTool
             }
             
         }
-        //CommandBindingEventHandlers for Stop
+        /// <summary>
+        /// CommandBindingEventHandlers for Stop
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Stop_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            //Todo
+            
             if (Synth.State!=SynthesizerState.Ready)
             {
                 e.CanExecute = true;
@@ -215,7 +235,10 @@ namespace TextToSpeechTool
 
             NotifyPropertyChanged("Synth");
         }
-        //CommandBindingEventHandlers for Save
+
+        /// <summary>
+        /// CommandBindingEventHandlers for Save
+        /// </summary>
         private void Save_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
             //Todo
@@ -257,7 +280,9 @@ namespace TextToSpeechTool
 
 
         private double _progress;
-
+        /// <summary>
+        /// Speech progress.
+        /// </summary>
         public double progress
         {
             get => _progress;
